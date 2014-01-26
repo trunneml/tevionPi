@@ -48,15 +48,21 @@ avg_d = 0
 bit_lists = []
 bit_list = []
 for t in toggel_list:
+    # Do some statistics here
     d = t[1]
     avg_d = avg_d + d
     if d > max_d:
         max_d = d
+    # Real work down here
     if d >= 400 and d <= 1600:
+        # Only append valid values
         bit_list.append(d)
     else:
-        if len(bit_list) >= 30:
+        # Gap detected
+        if len(bit_list) >= 41:
+            # Gap is end of bit_list so add the list
             bit_lists.append(bit_list)
+        # Reset the bit list
         bit_list = []
 
 
