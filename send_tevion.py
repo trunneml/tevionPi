@@ -35,10 +35,10 @@ class TevionCode(object):
     def _send_bit(self, value):
         wiringpi2.digitalWrite(self.pin, self._toggle_pin_value())
         if value:
-            wiringpi2.delayMicroseconds(int(self._delta_long*0.8))
+            wiringpi2.delayMicroseconds(int(self._delta_long * 0.8))
             self.duration += self._delta_long
         else:
-            wiringpi2.delayMicroseconds(int(self._delta_short*0.8))
+            wiringpi2.delayMicroseconds(int(self._delta_short * 0.8))
             self.duration += self._delta_short
         self.toggles += 1
 
@@ -46,16 +46,16 @@ class TevionCode(object):
         h = []
         for n in house_code:
             h.extend(self._bitfield(n))
-        h.append(1) # Parity hack!?!
+        h.append(1)  # Parity hack!?!
         self._house_code = h
-        
+
     def _bitfield(self, n):
-        return [1 if digit=='1' else 0 for digit in '{0:08b}'.format(n)]
-    
+        return [1 if digit == '1' else 0 for digit in '{0:08b}'.format(n)]
+
     def _send_house_code(self):
         for h in self._house_code:
             self._send_bit(h)
-    
+
     def send_code(self, code):
         self._send_house_code()
         for c in code:
