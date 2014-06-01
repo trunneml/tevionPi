@@ -43,17 +43,20 @@ if __name__ == '__main__':
     description='Sends 433Mhz codes for the tevion remote control outlet')
 
     parser.add_argument(
-        '--pin', type=int, default=1,
+        '-p', '--pin', type=int, default=1,
          help='Number of the wiringpi pin that should be used',
     )
     parser.add_argument(
-        '--housecode', type=int, nargs=3, default=[77, 42, 170],
-        help='The Tevion house code of the outlets')
+        '-hc', '--housecode', type=int, nargs=3, default=[77, 42, 170],
+        help='The Tevion house code of the outlets.\nDefault is 77, 42, 170.')
     parser.add_argument(
         'command', type=str, choices=['on', 'off', 'brighter', 'darker'])
     parser.add_argument(
         'outlet', type=int, nargs='?', default=0, choices=range(1, 5),
         help='Number of the power outlet, or all if omitted')
+    parser.add_argument(
+        '-r', '--repeat', type=int, default=5,
+        help='Number of time the given code should be send.\n Default is 5.')
     args = parser.parse_args()
 
     wiringpi_pin = args.pin
