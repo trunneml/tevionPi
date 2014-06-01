@@ -45,7 +45,7 @@ class TevionCode(object):
         }
     }
 
-    def __init__(self, house_code, pin, adj=0.8):
+    def __init__(self, house_code, pin, adj=1):
         self.set_house_code(house_code)
         self.pin = pin
         self.pin_value = 0
@@ -161,7 +161,7 @@ if __name__ == '__main__':
         help='Number of time the given code should be send.\n Default is 5.')
     parser.add_argument('-d', '--debug', action="store_true",
                         help='Activates debug output')
-    parser.add_argument('--adj', type=float, default=0.8,
+    parser.add_argument('--adj', type=float, default=1,
                         help='Adjust the sending speed.')
     args = parser.parse_args()
 
